@@ -1,0 +1,50 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.page-todo{
+  /* background-color: #75b3ec */
+  margin-left: auto;
+  border-left: #0a0a0a;
+  border-left-style: dashed;
+}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 100;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #131212;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #0a0a0a;
+  background-color: rgb(164, 164, 223);
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+/* #listTodo div:hover {
+  color: white;
+  background-color: rgb(169, 169, 226);
+} */
