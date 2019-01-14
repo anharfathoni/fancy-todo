@@ -121,10 +121,13 @@ $(document).ready(function () {
       data: newTodo
     })
       .done(todo => {
-        getTodo()
+        showSuccessMessage(todo.message)
+        clearTodoMessage()
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearTodoMessage()
       })
   }
 
@@ -182,10 +185,13 @@ $(document).ready(function () {
     })
       .done(todo => {
         console.log(todo.message)
-        getTodo()
+        showSuccessMessage(todo.message)
+        clearTodoMessage()
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearTodoMessage()
       })
   }
 
@@ -199,10 +205,13 @@ $(document).ready(function () {
     })
       .done(todo => {
         console.log(todo.message)
-        getTodo()
+        showSuccessMessage(todo.message)
+        clearTodoMessage()
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearTodoMessage()
       })
   }
 
@@ -270,10 +279,19 @@ $(document).ready(function () {
     })
       .done(project => {
         $('#projectName').val('')
-        getProject()
+        showSuccessMessage(project.message)
+        setTimeout(() => {
+          $('#messageAfterLogin').empty()
+          getProject()
+        }, 2000);
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        setTimeout(() => {
+          $('#messageAfterLogin').empty()
+          getProject()
+        }, 4000);
       })
   }
 
@@ -403,10 +421,13 @@ $(document).ready(function () {
       data: newTodo
     })
       .done(todo => {
-        getDetailsProject(projectId)
+        showSuccessMessage(todo.message)
+        clearMessage(projectId)
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearMessage(projectId)
       })
   }
 
@@ -441,11 +462,15 @@ $(document).ready(function () {
       .done(todo => {
         console.log(todo)
         $('#emailInvite').val('')
-        getDetailsProject(projectId)
+        showSuccessMessage(todo.message)
+        clearMessage(projectId)
+
       })
       .fail(error => {
-        console.log(error)
+        // console.log(error)
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearMessage(projectId)
       })
   }
 
@@ -503,10 +528,13 @@ $(document).ready(function () {
     })
       .done(todo => {
         console.log(todo.message)
-        getDetailsProject(projectId)
+        showSuccessMessage(todo.message)
+        clearMessage(projectId)
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearMessage(projectId)
       })
   }
 
@@ -520,10 +548,13 @@ $(document).ready(function () {
     })
       .done(todo => {
         console.log(todo.message)
-        getDetailsProject(projectId)
+        showSuccessMessage(todo.message)
+        clearMessage(projectId)
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        showDangerMessage(error.responseJSON.message)
+        clearMessage(projectId)
       })
   }
 
@@ -567,6 +598,37 @@ $(document).ready(function () {
       })
   }
 
+  showDangerMessage = function(msg){
+    $('#messageAfterLogin').append(`
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${msg}</strong>
+          </div>
+        `)
+  }
+
+  showSuccessMessage = function(msg){
+    $('#messageAfterLogin').append(`
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${msg}</strong>
+          </div>
+        `)
+  }
+
+  clearMessage = function(projectId){
+    setTimeout(() => {
+      $('#messageAfterLogin').empty()
+      getDetailsProject(projectId)   
+    }, 3000);
+  }
+
+  clearTodoMessage = function(){
+    setTimeout(() => {
+      $('#messageAfterLogin').empty()
+      getTodo()
+    }, 3000);
+  }
 
   //-------------------------USER Auth------------------------------//
 
@@ -598,12 +660,29 @@ $(document).ready(function () {
       data: newUser
     })
       .done(user => {
-
         console.log(user.message)
+        $('#messageBeforeLogin').append(`
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${user.message}</strong>
+          </div>
+        `)
+        setTimeout(() => {
+          $('#messageBeforeLogin').empty()
+        }, 5000);
       })
       .fail(error => {
         console.log(error.responseJSON)
         console.log(error.responseJSON.message)
+        $('#messageBeforeLogin').append(`
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${error.responseJSON.message}</strong>
+          </div>
+        `)
+        setTimeout(() => {
+          $('#messageBeforeLogin').empty()
+        }, 5000);
       })
   }
 
@@ -622,10 +701,29 @@ $(document).ready(function () {
         console.log(user.message)
         $('#inputEmail').val(''),
         $('#inputPassword').val('')
-        checkLogin()
+        
+        $('#messageBeforeLogin').append(`
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${user.message}</strong>
+          </div>
+        `)
+        setTimeout(() => {
+          $('#messageBeforeLogin').empty()
+          checkLogin()
+        }, 2000);
       })
       .fail(error => {
         console.log(error.responseJSON.message)
+        $('#messageBeforeLogin').append(`
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${error.responseJSON.message}</strong>
+          </div>
+        `)
+        setTimeout(() => {
+          $('#messageBeforeLogin').empty()
+        }, 5000);
       })
   }
 
@@ -642,11 +740,28 @@ $(document).ready(function () {
       .done(user => {
         localStorage.setItem('token', user.token)
         console.log(user)
-        checkLogin()
+        $('#messageBeforeLogin').append(`
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${user.message}</strong>
+          </div>
+        `)
+        setTimeout(() => {
+          $('#messageBeforeLogin').empty()
+          checkLogin()
+        }, 2000);
       })
       .fail(error => {
-        console.log("error")
         console.log(error)
+        $('#messageBeforeLogin').append(`
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${error.responseJSON.message}</strong>
+          </div>
+        `)
+        setTimeout(() => {
+          $('#messageBeforeLogin').empty()
+        }, 5000);
       })
   }
 
