@@ -562,7 +562,7 @@ CODE: 401 (Unauthorized)
 
 CODE: 500
 {
-  error, message: 'internal server error"
+  error, message: "internal server error"
 }
 ```
 <br>
@@ -600,6 +600,6 @@ CODE: 401 (Unauthorized)
 
 CODE: 500
 {
-  error, message: 'internal server error"
+  error, message: "internal server error"
 }
 ```
