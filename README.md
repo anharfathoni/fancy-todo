@@ -457,10 +457,16 @@ CODE: 500
 ## Add Todo to Project
 ***
 1. URL  `localhost:3000/projects/:projectId`
-2. Method `DELETE`
+2. Method `POST`
 3. URL Param 
 4. Data Param
 ```javascript
+data: {
+  name:
+  description:
+  due_date:
+}
+
 headers: {
       'token': <token>
     }
@@ -491,10 +497,16 @@ CODE: 500
 ## Edit Todo Project
 ***
 1. URL  `localhost:3000/projects/:projectId/:todoId`
-2. Method `DELETE`
+2. Method `PUT`
 3. URL Param 
 4. Data Param
 ```javascript
+data: {
+  name: 
+  description:
+  due_date:
+  status:
+}
 headers: {
       'token': <token>
     }
@@ -524,7 +536,7 @@ CODE: 500
 ***
 ## Delete Todo Project
 ***
-1. URL  `localhost:3000/projects/`
+1. URL  `localhost:3000/projects/:projectId/:todoId`
 2. Method `DELETE`
 3. URL Param 
 4. Data Param
@@ -559,10 +571,14 @@ CODE: 500
 ## Invite Member
 ***
 1. URL  `localhost:3000/projects/:projectId/invite`
-2. Method `DELETE`
+2. Method `POST`
 3. URL Param 
 4. Data Param
 ```javascript
+data: {
+  email: "friend's email"
+}
+
 headers: {
       'token': <token>
     }
@@ -571,7 +587,7 @@ headers: {
 ```javascript
 CODE : 200
 {
-  message: ""
+  message: "success invite"
 }
 
 ```
